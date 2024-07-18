@@ -12,7 +12,7 @@ router.post("/register", async (req, res) => {
         
         const user = await User.findOne({ email });
 
-        if (user) return res.status(400).json({ msg: "User already exists" });
+        if (user) return res.status(400).json({ msg: "Kullanıcı zaten var" });
 
        
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -21,9 +21,10 @@ router.post("/register", async (req, res) => {
 
         await newUser.save();
 
-        res.json({ msg: "User registered successfully" });
+        res.json({ msg: "Kullanıcı Oluşturuldu" });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server error");
     }
 });
+
